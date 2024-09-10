@@ -22,7 +22,7 @@ class BasketballCourt {
   void getPlayersAtTime(String time) {
     if (schedule.containsKey(time)) {
       print(
-          "Players playing at $name on $time: ${schedule[time]?.map((p) => p.login).join(', ')}");
+          "\nPlayers playing at $name on $time: ${schedule[time]?.map((p) => p.login).join(', ')}\n");
     } else {
       print("No players scheduled for $time at $name.");
     }

@@ -12,19 +12,23 @@ void main() {
 
   // Create a new player and add to the repository
   Player playerViktor = Player.createProfile("Viktor", "pass123", repository);
+  Player playerMike = Player.createProfile("Mike", "pass456", repository);
 
   // Log in the player
   playerViktor.loginPlayer("Viktor", "pass123", repository);
 
   // Create a new basketball court and add to the repository
-  BasketballCourt court1 = BasketballCourt("Court1", "JakobBruker");
-  court1.saveCourt(repository);
+  BasketballCourt court_jb = BasketballCourt("Court-JB", "Jakob Brucker");
+  court_jb.saveCourt(repository);
+  BasketballCourt court_sl = BasketballCourt("Court-SL", "Sophie La Roche");
+  court_sl.saveCourt(repository);
 
   // Player indicates a time to play
-  court1.indicatePlayTime(playerViktor, "10:00 AM");
+  court_jb.indicatePlayTime(playerViktor, "10:00 AM");
+  court_jb.indicatePlayTime(playerMike, "10:00 AM");
 
   // Check who is playing at 10:00 AM
-  court1.getPlayersAtTime("10:00 AM");
+  court_jb.getPlayersAtTime("10:00 AM");
 
   // Log out the player
   playerViktor.logoutPlayer();
@@ -33,5 +37,5 @@ void main() {
   playerViktor.deleteProfile(repository);
 
   // Delete the court from the repository
-  court1.deleteCourt(repository);
+  court_jb.deleteCourt(repository);
 }
