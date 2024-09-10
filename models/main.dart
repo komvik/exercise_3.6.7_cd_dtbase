@@ -1,73 +1,37 @@
-import 'dart:io';
-
-import '../login_user.dart';
+import 'player.dart';
+import 'basketball_court.dart';
+import 'app_database_repository.dart';
 
 // Login, damit der Fortschritt online gespeichert wird.
 // Anzeigen von Code Snippets, bei denen gesagt werden soll, was rauskommt.
 // Ein Exerciseboard, auf dem man sieht, wie viele und welche Aufgaben man gemacht hat.
 
 void main() {
-  // Login, damit der Fortschritt online gespeichert wird.
-  // Anzeigen von Code Snippets, bei denen gesagt werden soll, was rauskommt.
-  // Ein Exerciseboard, auf dem man sieht, wie viele und welche Aufgaben man gemacht hat.
-  print("Willkommen bei Dart Fast CLI.");
-  print(
-      "Hier wird dir Code gezeigt, von dem du sagen sollst, ob er richtig oder falsch ist.");
+  // Create the repository
+  AppDatabaseRepository repository = AppDatabaseRepository();
 
-  const String expectedUserName = "kai";
-  const String expecedUserPassword = "passwort";
-  bool isUserLoggedIn = false;
+  // Create a new player and add to the repository
+  Player playerViktor = Player.createProfile("Viktor", "pass123", repository);
 
-  // Wie lange läuft das Programm?
-  bool isProgramRunning = true;
-  while (isProgramRunning) {
-    if (isUserLoggedIn) {
-      print("Was möchtest du tun? Programm (b)eenden, (S)nippet anzeigen.");
-    } else {
-      print(
-          "Was möchtest du tun? Programm (b)eenden, (L)ogin, (S)nippet anzeigen.");
-    }
-    // Eingabe des Benutzers.
-    String userChoiceInput = stdin.readLineSync()!;
+  // Log in the player
+  playerViktor.loginPlayer("Viktor", "pass123", repository);
 
-    switch (userChoiceInput) {
-      case "b" || "B":
-        isProgramRunning = false;
-      // Benutzer soll sich mit Username und Passwort einloggen können.
-      case "l" || "L":
-        // Funktion braucht:
-        // Username + Passwort
-        // Funktion gibt zurück:
-        // Ob Benutzer erfolgreich eingeloggt.
-        isUserLoggedIn = loginUser(expectedUserName, expecedUserPassword);
+  // Create a new basketball court and add to the repository
+  BasketballCourt court1 = BasketballCourt("Court1", "JakobBruker");
+  court1.saveCourt(repository);
 
-      // Anzeigen von Code Snippets, bei denen gesagt werden soll, was rauskommt.
-      case "s" || "S":
-        // Überprüfen, ob der Benutzer eingeloggt ist.
-        // Wenn nein, Meldung ausgeben.
-        // Wenn ja, dann Code Snippet zeigen.
-        // Abfrage machen, was rauskommt.
-        // Je nach Abfrage loben oder noch mal zeigen.
-        String exercise = 'void main() { print("Hi")}';
-        String solution = '"Hi"';
-        bool exerciseSolved = false;
+  // Player indicates a time to play
+  court1.indicatePlayTime(playerViktor, "10:00 AM");
 
-        if (isUserLoggedIn) {
-          print("Was gibt der folgende Code aus?");
-          print(exercise);
-          print("");
-          String result = stdin.readLineSync()!;
-          if (result == solution) {
-            print("Sehr gut! Schön gelöst!");
-            exerciseSolved = true;
-          } else {
-            print("Versuche es noch mal, bitte");
-          }
-        } else {
-          print("Bitte einloggen!");
-        }
-    }
+  // Check who is playing at 10:00 AM
+  court1.getPlayersAtTime("10:00 AM");
 
-    // Anzeige abhängig von Eingabe.
-  }
+  // Log out the player
+  playerViktor.logoutPlayer();
+
+  // Delete the player profile
+  playerViktor.deleteProfile(repository);
+
+  // Delete the court from the repository
+  court1.deleteCourt(repository);
 }

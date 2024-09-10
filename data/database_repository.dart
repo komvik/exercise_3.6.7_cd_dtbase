@@ -1,21 +1,16 @@
-import '../models/problem.dart';
-import '../models/user.dart';
+import '../models/basketball_court.dart';
+import '../models/player.dart';
 
 abstract class DatabaseRepository {
-  // Einen User zur App hinzufügen (registieren) (addUser / createUser)
-  void addUser(String userName, String password);
-  // Die Daten eines Users anpassen (editUser)
-  void editUser(User user);
-  // Username ändern (changeUserName)
+  // Player-related methods
+  void addPlayer(Player player);
+  Player? getPlayer(String login);
+  void updatePlayer(Player player);
+  void deletePlayer(String login);
 
-  // Logindaten eines Benutzers überprüfen (checkUserCredentials)
-  bool checkUserCredentials(String userName, String password);
-  // Code-Aufgabe erstellen (createProblem)
-  // Code-Aufgabe löschen (deleteProblem)
-  // Prüfung einer Lösung (checkSolution)
-  bool checkSolution(Problem problem, String solution);
-  // Code-Aufgabe holen (getNextProblem)
-  Problem getNextProblem();
-  // Alle Code-Aufgaben holen
-  List<Problem> getAllProblems();
+  // BasketballCourt-related methods
+  void addCourt(BasketballCourt court);
+  BasketballCourt? getCourt(String name);
+  void updateCourt(BasketballCourt court);
+  void deleteCourt(String name);
 }
