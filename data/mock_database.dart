@@ -3,11 +3,11 @@ import '../models/basketball_court.dart';
 import '../models/player.dart';
 
 class MockDatabase implements DatabaseRepository {
-  // In-memory storage for players and basketball courts
+  // In  memory storage for players and basketball courts
   Map<String, Player> playerDatabase = {};
   Map<String, BasketballCourt> courtDatabase = {};
 
-  // Player-related methods
+  // Player  methods
 
   @override
   void addPlayer(Player player) {
@@ -49,7 +49,7 @@ class MockDatabase implements DatabaseRepository {
     }
   }
 
-  // BasketballCourt-related methods
+  // BasketballCourt  methods
 
   @override
   void addCourt(BasketballCourt court) {
