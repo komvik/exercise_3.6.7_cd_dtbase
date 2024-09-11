@@ -1,8 +1,8 @@
-import '../data/database_repository.dart';
-import 'basketball_court.dart';
-import 'player.dart';
+import 'database_repository.dart';
+import '../models/basketball_court.dart';
+import '../models/player.dart';
 
-class AppDatabaseRepository implements DatabaseRepository {
+class MockDatabase implements DatabaseRepository {
   // In-memory storage for players and basketball courts
   Map<String, Player> playerDatabase = {};
   Map<String, BasketballCourt> courtDatabase = {};

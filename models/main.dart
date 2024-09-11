@@ -1,6 +1,6 @@
 import 'player.dart';
 import 'basketball_court.dart';
-import 'app_database_repository.dart';
+import '../data/mock_database.dart';
 
 // Login, damit der Fortschritt online gespeichert wird.
 // Anzeigen von Code Snippets, bei denen gesagt werden soll, was rauskommt.
@@ -8,7 +8,7 @@ import 'app_database_repository.dart';
 
 void main() {
   // Create the repository
-  AppDatabaseRepository repository = AppDatabaseRepository();
+  MockDatabase repository = MockDatabase();
 
   // Create a new player and add to the repository
   Player playerViktor = Player.createProfile("Viktor", "pass123", repository);
